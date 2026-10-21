@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warung Prasmanan Malam - Kehangatan Rasa Rumahan</title>
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ==========================================
+       CSS VARIABLES & NIGHT VIBE THEME
+       ========================================== */
+    :root {
+      --bg-dark: #12100e;
+      --bg-card: #1a1614;
+      --bg-card-hover: #241e1b;
+      --bg-surface: #1e1916;
+      --text-main: #f5efe6;
+      --text-muted: #b8aba0;
+      --accent-gold: #d4a359;
+      --accent-amber: #e67e22;
+      --accent-glow: rgba(212, 163, 89, 0.25);
+      --wood-dark: #2c1d11;
+      --wood-border: #422b19;
+      --danger: #e74c3c;
+      --success: #2ecc71;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-glow: 0 10px 30px -10px rgba(230, 126, 34, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* CSS Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    body {
+      line-height: 1.6;
+      background: radial-gradient(circle at 50% 0%, #261911 0%, var(--bg-dark) 70%);
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Playfair Display', serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      outline: none;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-padding {
+      padding: 90px 0;
+    }
+
+    /* Section Header Reusable */
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title span {
+      color: var(--accent-amber);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--text-main);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-amber));
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ==========================================
+       HEADER & NAVIGATION
+       ========================================== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: var(--transition);
+      background: rgba(18, 16, 14, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212, 163, 89, 0.1);
+    }
+
+    header.scrolled {
+      padding: 10px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      background: rgba(18, 16, 14, 0.95);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      transition: var(--transition);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+
+    .logo i {
+      font-size: 1.6rem;
+      color: var(--accent-amber);
+      filter: drop-shadow(0 0 8px var(--accent-amber));
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-link {
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent-gold);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-amber);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+    }
+
+    .btn {
+      padding: 12px 26px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-amber) 100%);
+      color: #0d0a08;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(230, 126, 34, 0.5);
+      filter: brightness(1.1);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--wood-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 163, 89, 0.1);
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.5rem;
+    }
+
+    /* ==========================================
+       HERO SECTION
+       ========================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-top: 100px;
+      background: linear-gradient(to right, rgba(18, 16, 14, 0.92) 40%, rgba(18, 16, 14, 0.6)),
+                  url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      z-index: 2;
+    }
+
+    .badge-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(230, 126, 34, 0.15);
+      border: 1px solid rgba(230, 126, 34, 0.4);
+      border-radius: 30px;
+      color: var(--accent-amber);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      backdrop-filter: blur(5px);
+    }
+
+    .badge-open .dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(46, 204, 113, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 35px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      margin-top: 50px;
+      display: flex;
+      gap: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .stat-item h4 {
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+    }
+
+    .stat-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       LAYANAN UTAMA (SERVICES)
+       ========================================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-lg);
+      padding: 40px 30px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-amber));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      background: var(--bg-card-hover);
+      border-color: rgba(212, 163, 89, 0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .service-card:hover::before {
+      opacity: 1;
+    }
+
+    .service-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(212, 163, 89, 0.1);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      margin-bottom: 24px;
+      border: 1px solid rgba(212, 163, 89, 0.2);
+    }
+
+    .service-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .service-features {
+      list-style: none;
+    }
+
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .service-features li i {
+      color: var(--accent-amber);
+      font-size: 0.8rem;
+    }
+
+    /* ==========================================
+       PRASMANAN SIMULATOR / CALCULATOR
+       ========================================== */
+    .simulator-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 992px) {
+      .simulator-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .sim-category {
+      margin-bottom: 25px;
+    }
+
+    .sim-category h4 {
+      font-size: 1.1rem;
+      color: var(--accent-gold);
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .item-checkbox {
+      display: none;
+    }
+
+    .item-label {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .item-label:hover {
+      border-color: var(--accent-gold);
+      background: rgba(212, 163, 89, 0.05);
+    }
+
+    .item-checkbox:checked + .item-label {
+      background: rgba(230, 126, 34, 0.15);
+      border-color: var(--accent-amber);
+      box-shadow: 0 0 10px rgba(230, 126, 34, 0.2);
+    }
+
+    .item-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .item-price {
+      font-size: 0.8rem;
+      color: var(--accent-gold);
+      margin-top: 6px;
+    }
+
+    /* Summary Card */
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-md);
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 100px;
+    }
+
+    .summary-title {
+      font-size: 1.2rem;
+      color: var(--text-main);
+      border-bottom: 1px solid var(--wood-border);
+      padding-bottom: 12px;
+      margin-bottom: 15px;
+    }
+
+    .selected-items-list {
+      max-height: 220px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      padding-right: 5px;
+    }
+
+    .selected-items-list::-webkit-scrollbar {
+      width: 4px;
+    }
+    .selected-items-list::-webkit-scrollbar-thumb {
+      background: var(--wood-border);
+      border-radius: 4px;
+    }
+
+    .selected-item-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      color: var(--text-muted);
+    }
+
+    .total-section {
+      border-top: 1px dashed var(--wood-border);
+      padding-top: 15px;
+      margin-top: 10px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .total-price {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+    }
+
+    /* ==========================================
+       MENU SHOWCASE & FILTER
+       ========================================== */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 10px 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      color: var(--text-muted);
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--accent-amber);
+      color: #0d0a08;
+      border-color: var(--accent-amber);
+      font-weight: 600;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      border-color: var(--accent-gold);
+    }
+
+    .menu-img {
+      height: 180px;
+      width: 100%;
+      object-fit: cover;
+      background-color: var(--wood-dark);
+    }
+
+    .menu-info {
+      padding: 20px;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .menu-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .menu-badge {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      background: rgba(212, 163, 89, 0.15);
+      color: var(--accent-gold);
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .menu-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+
+    .menu-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 12px;
+    }
+
+    .menu-price {
+      font-weight: 700;
+      color: var(--accent-amber);
+      font-size: 1.1rem;
+    }
+
+    .btn-add-sim {
+      background: none;
+      border: 1px solid var(--accent-gold);
+      color: var(--accent-gold);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-add-sim:hover {
+      background: var(--accent-gold);
+      color: #0d0a08;
+    }
+
+    /* ==========================================
+       GALLERY & TESTIMONI
+       ========================================== */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-md);
+      padding: 25px;
+      position: relative;
+    }
+
+    .stars {
+      color: #f1c40f;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+
+    .review-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reviewer-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--wood-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      font-weight: 700;
+      border: 1px solid var(--accent-gold);
+    }
+
+    .reviewer-info h5 {
+      color: var(--text-main);
+      font-size: 0.95rem;
+    }
+
+    .reviewer-info span {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ==========================================
+       CONTACT & LOCATION
+       ========================================== */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 992px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(230, 126, 34, 0.1);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-amber);
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .info-text h4 {
+      font-size: 1.1rem;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .info-text p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .map-box {
+      width: 100%;
+      height: 200px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--wood-border);
+      margin-top: 20px;
+      background: #201a17;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .map-mock {
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .contact-form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 10px rgba(212, 163, 89, 0.2);
+    }
+
+    /* ==========================================
+       MODAL POPUP
+       ========================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 500px;
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      transform: translateY(20px);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .modal-close:hover {
+      color: var(--text-main);
+    }
+
+    /* ==========================================
+       TOAST NOTIFICATION
+       ========================================== */
+    .toast-container {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: var(--bg-surface);
+      border-left: 4px solid var(--accent-amber);
+      color: var(--text-main);
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      transform: translateX(120%);
+      transition: transform 0.4s ease;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    /* ==========================================
+       FOOTER
+       ========================================== */
+    footer {
+      background: #0b0908;
+      border-top: 1px solid var(--wood-border);
+      padding: 60px 0 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-col h4 {
+      color: var(--accent-gold);
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-amber);
+      padding-left: 5px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1px solid var(--wood-border);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-btn:hover {
+      background: var(--accent-amber);
+      color: #0d0a08;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================
+       RESPONSIVE MOBILE NAV
+       ========================================== */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--bg-surface);
+        flex-direction: column;
+        justify-content: center;
+        padding: 40px;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+        transition: var(--transition);
+        border-left: 1px solid var(--wood-border);
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .hero-title {
+        font-size: 2.4rem;
+      }
+
+      .section-title h2 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER & NAVIGASI
+       ========================================== -->
+  <header id="header">
+    <div class="container">
+      <nav class="nav-wrapper">
+        <a href="#beranda" class="logo">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Prasmanan Malam</span>
+        </a>
+
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#beranda" class="nav-link active">Beranda</a></li>
+          <li><a href="#layanan" class="nav-link">Layanan</a></li>
+          <li><a href="#simulator" class="nav-link">Kalkulator Prasmanan</a></li>
+          <li><a href="#menu" class="nav-link">Menu Populer</a></li>
+          <li><a href="#kontak" class="nav-link">Kontak</a></li>
+          <li>
+            <button class="btn btn-primary" onclick="openOrderModal()">
+              <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
+            </button>
+          </li>
+        </ul>
+
+        <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       HERO SECTION
+       ========================================== -->
+  <section id="beranda" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="badge-open">
+          <span class="dot"></span>
+          Buka Setiap Malam 17.00 - 01.00 WIB
+        </div>
+        <h1 class="hero-title">Kehangatan Prasmanan Malam - <span>Rasa Otentik Rumahan</span></h1>
+        <p class="hero-desc">Nikmati puluhan pilihan lauk racikan bumbu warisan khas Nusantara dalam suasana santai malam hari. Bebas pilih sepuasnya, hangat setiap saat.</p>
+
+        <div class="hero-buttons">
+          <a href="#simulator" class="btn btn-primary">
+            <i class="fa-solid fa-calculator"></i> Simulasi Piring Prasmanan
+          </a>
+          <a href="#menu" class="btn btn-secondary">
+            <i class="fa-solid fa-book-open"></i> Lihat Menu Populer
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h4>35+</h4>
+            <p>Pilihan Lauk & Sayur</p>
+          </div>
+          <div class="stat-item">
+            <h4>100%</h4>
+            <p>Bumbu Alami Resep Ibu</p>
+          </div>
+          <div class="stat-item">
+            <h4>4.9 ★</h4>
+            <p>Ulasan Pelanggan Setia</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TIGA LAYANAN UTAMA
+       ========================================== -->
+  <section id="layanan" class="section-padding">
+    <div class="container">
+      <div class="section-title">
+        <span>Layanan Terbaik Kami</span>
+        <h2>Pengalaman Kuliner Malam</h2>
+      </div>
+
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fa-solid fa-plate-wheat"></i>
+          </div>
+          <h3>Makan di Tempat (Dine-in)</h3>
+          <p>Konsep prasmanan sepuasnya dengan suasana lampu hangat malam hari yang estetik & nyaman untuk kumpul teman/keluarga.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> Nasi Hangat Sepuasnya</li>
+            <li><i class="fa-solid fa-circle-check"></i> 35+ Variasi Lauk Selalu Fresh</li>
+            <li><i class="fa-solid fa-circle-check"></i> Area Outdoor & Indoor Adem</li>
+          </ul>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fa-solid fa-bell-concierge"></i>
+          </div>
+          <h3>Catering & Acara</h3>
+          <p>Melayani prasmanan untuk acara syukuran, arisan, ulang tahun, hingga gathering kantor dengan peralatan lengkap.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> Menu Custom Sesuai Budget</li>
+            <li><i class="fa-solid fa-circle-check"></i> Gratis Peralatan & Pramusaji</li>
+            <li><i class="fa-solid fa-circle-check"></i> Pengiriman Tepat Waktu</li>
+          </ul>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fa-solid fa-box-tissue"></i>
+          </div>
+          <h3>Nasi Kotak & Delivery</h3>
+          <p>Pesan-antar nasi kotak custom untuk santap malam di kantor atau rumah. Dikemas higienis dengan porsi mantap.</p>
+          <ul class="service-features">
+            <li><i class="fa-solid fa-circle-check"></i> Kemasan Box Food-Grade</li>
+            <li><i class="fa-solid fa-circle-check"></i> Bebas Kombinasi Lauk</li>
+            <li><i class="fa-solid fa-circle-check"></i> Pengiriman Area Kota</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       KALKULATOR / SIMULATOR PRASMANAN
+       ========================================== -->
+  <section id="simulator" class="section-padding" style="background: var(--bg-card);">
+    <div class="container">
+      <div class="section-title">
+        <span>Interaktif & Transparan</span>
+        <h2>Estimasi Piring Prasmanan Anda</h2>
+      </div>
+
+      <div class="simulator-container">
+        <!-- Pilihan Lauk Left Side -->
+        <div class="simulator-selection">
+
+          <!-- Karbohidrat -->
+          <div class="sim-category">
+            <h4><i class="fa-solid fa-bowl-rice"></i> 1. Pilih Karbohidrat / Nasi</h4>
+            <div class="options-grid">
+              <div>
+                <input type="checkbox" id="item-nasi-putih" class="item-checkbox" data-name="Nasi Putih Warm" data-price="4000" onchange="calculateTotal()" checked>
+                <label for="item-nasi-putih" class="item-label">
+                  <span class="item-name">Nasi Putih Warm</span>
+                  <span class="item-price">Rp 4.000</span>
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="item-nasi-gurih" class="item-checkbox" data-name="Nasi Uduk / Gurih" data-price="6000" onchange="calculateTotal()">
+                <label for="item-nasi-gurih" class="item-label">
+                  <span class="item-name">Nasi Uduk / Gurih</span>
+                  <span class="item-price">Rp 6.000</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lauk Utama -->
+          <div class="sim-category">
+            <h4><i class="fa-solid fa-drumstick-bite"></i> 2. Pilih Lauk Utama</h4>
+            <div class="options-grid">
+              <div>
+                <input type="checkbox" id="item-ayam-bakar" class="item-checkbox" data-name="Ayam Bakar Madu" data-price="14000" onchange="calculateTotal()" checked>
+                <label for="item-ayam-bakar" class="item-label">
+                  <span class="item-name">Ayam Bakar Madu</span>
+                  <span class="item-price">Rp 14.000</span>
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="item-rendang" class="item-checkbox" data-name="Rendang Daging Sapi" data-price="18000" onchange="calculateTotal()">
+                <label for="item-rendang" class="item-label">
+                  <span class="item-name">Rendang Daging Sapi</span>
+                  <span class="item-price">Rp 18.000</span>
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="item-ikan-goreng" class="item-checkbox" data-name="Ikan Nila Sambal Matah" data-price="13000" onchange="calculateTotal()">
+                <label for="item-ikan-goreng" class="item-label">
+                  <span class="item-name">Ikan Nila Sambal Matah</span>
+                  <span class="item-price">Rp 13.000</span>
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="item-telur-balado" class="item-checkbox" data-name="Telur Balado Khas" data-price="6000" onchange="calculateTotal()">
+                <label for="item-telur-balado" class="item-label">
+                  <span class="item-name">Telur Balado Khas</span>
+                  <span class="item-price">Rp 6.000</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sayuran & Pendamping -->
+          <div class="sim-category">
+            <h4><i class="fa-solid fa-carrot"></i> 3. Sayuran & Pelengkap</h4>
+            <div class="options-grid">
+              <div>
+                <input type="checkbox" id="item-tumis-kangkung" class="item-checkbox" data-name="Tumis Kangkung Terasi" data-price="5000" onchange="calculateTotal()" checked>
+                <label for="item-tumis-kangkung" class="item-label">
+                  <span class="item-name">Tumis Kangkung Terasi</span>
+                  <span class="item-price">Rp 5.000</span>
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="item-capcay" class="item-checkbox" data-name="Capcay Bakso Warm" data-price="6000" onchange="calculateTotal()">
+                <label for="item-capcay" class="item-label">
+                  <span class="item-name">Capcay Bakso Warm</span>
+                  <span class="item-price">Rp 6.000</span>
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="item-sambal-ijau" class="item-checkbox" data-name="Sambal Bawang & Lalapan" data-price="2000" onchange="calculateTotal()" checked>
+                <label for="item-sambal-ijau" class="item-label">
+                  <span class="item-name">Sambal & Lalapan</span>
+                  <span class="item-price">Rp 2.000</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Minuman -->
+          <div class="sim-category">
+            <h4><i class="fa-solid fa-glass-water"></i> 4. Minuman</h4>
+            <div class="options-grid">
+              <div>
+                <input type="checkbox" id="item-es-teh" class="item-checkbox" data-name="Es Teh Manis Warm-Night" data-price="4000" onchange="calculateTotal()" checked>
+                <label for="item-es-teh" class="item-label">
+                  <span class="item-name">Es Teh / Teh Hangat</span>
+                  <span class="item-price">Rp 4.000</span>
+                </label>
+              </div>
+              <div>
+                <input type="checkbox" id="item-wedang-jahe" class="item-checkbox" data-name="Wedang Jahe Rempah" data-price="7000" onchange="calculateTotal()">
+                <label for="item-wedang-jahe" class="item-label">
+                  <span class="item-name">Wedang Jahe Rempah</span>
+                  <span class="item-price">Rp 7.000</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Summary Right Side -->
+        <div class="summary-card">
+          <div>
+            <h3 class="summary-title"><i class="fa-solid fa-receipt"></i> Ringkasan Piring</h3>
+            <div class="selected-items-list" id="selected-items">
+              <!-- Item dinamis di-render lewat JS -->
+            </div>
+          </div>
+
+          <div class="total-section">
+            <div class="total-row">
+              <span>Total Estimasi:</span>
+              <span class="total-price" id="total-price-display">Rp 0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="orderFromSimulator()">
+              <i class="fa-brands fa-whatsapp"></i> Pesan Piring Ini VIA WA
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       MENU SHOWCASE FILTERABLE
+       ========================================== -->
+  <section id="menu" class="section-padding">
+    <div class="container">
+      <div class="section-title">
+        <span>Hidangan Spesial</span>
+        <h2>Menu Favorit Malam Hari</h2>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterMenu('all', this)">Semua Menu</button>
+        <button class="tab-btn" onclick="filterMenu('lauk', this)">Lauk Utama</button>
+        <button class="tab-btn" onclick="filterMenu('sayur', this)">Sayuran & Sambal</button>
+        <button class="tab-btn" onclick="filterMenu('minuman', this)">Minuman Hangat/Dingin</button>
+      </div>
+
+      <!-- Grid Menu -->
+      <div class="menu-grid" id="menu-grid">
+
+        <!-- Menu Item 1 -->
+        <div class="menu-card" data-category="lauk">
+          <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600&q=80" alt="Ayam Bakar" class="menu-img">
+          <div class="menu-info">
+            <div class="menu-header">
+              <h4 class="menu-title">Ayam Bakar Madu</h4>
+              <span class="menu-badge">Best Seller</span>
+            </div>
+            <p class="menu-desc">Ayam kampung empuk diracik bumbu madu kecap bakar arang.</p>
+            <div class="menu-footer">
+              <span class="menu-price">Rp 14.000</span>
+              <button class="btn-add-sim" onclick="quickSelect('item-ayam-bakar')" title="Tambah ke Simulator">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Item 2 -->
+        <div class="menu-card" data-category="lauk">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Rendang" class="menu-img">
+          <div class="menu-info">
+            <div class="menu-header">
+              <h4 class="menu-title">Rendang Daging Sapi</h4>
+              <span class="menu-badge">Favorit</span>
+            </div>
+            <p class="menu-desc">Daging sapi pilihan dengan bumbu santan pekat dimasak 8 jam.</p>
+            <div class="menu-footer">
+              <span class="menu-price">Rp 18.000</span>
+              <button class="btn-add-sim" onclick="quickSelect('item-rendang')" title="Tambah ke Simulator">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Item 3 -->
+        <div class="menu-card" data-category="sayur">
+          <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80" alt="Tumis Kangkung" class="menu-img">
+          <div class="menu-info">
+            <div class="menu-header">
+              <h4 class="menu-title">Tumis Kangkung Terasi</h4>
+              <span class="menu-badge">Fresh</span>
+            </div>
+            <p class="menu-desc">Kangkung segar dimasak dadakan dengan terasi udang rebon.</p>
+            <div class="menu-footer">
+              <span class="menu-price">Rp 5.000</span>
+              <button class="btn-add-sim" onclick="quickSelect('item-tumis-kangkung')" title="Tambah ke Simulator">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu Item 4 -->
+        <div class="menu-card" data-category="minuman">
+          <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80" alt="Wedang Jahe" class="menu-img">
+          <div class="menu-info">
+            <div class="menu-header">
+              <h4 class="menu-title">Wedang Jahe Rempah</h4>
+              <span class="menu-badge">Penghangat</span>
+            </div>
+            <p class="menu-desc">Seduhan jahe merah bakar, sereh, gula jawa, dan kayu manis.</p>
+            <div class="menu-footer">
+              <span class="menu-price">Rp 7.000</span>
+              <button class="btn-add-sim" onclick="quickSelect('item-wedang-jahe')" title="Tambah ke Simulator">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TESTIMONI / ULASAN
+       ========================================== -->
+  <section class="section-padding" style="background: var(--bg-card);">
+    <div class="container">
+      <div class="section-title">
+        <span>Kata Mereka</span>
+        <h2>Ulasan Pelanggan Malam</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"Tempat paling pas kalau lapar tengah malam. Pilihan lauknya lengkap banget, rasanya benar-benar kayak masakan ibu di rumah. Suasananya warm & syahdu!"</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">B</div>
+            <div class="reviewer-info">
+              <h5>Budi Santoso</h5>
+              <span>Pelanggan Setia Dine-in</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"Pernah pesan prasmanan catering untuk acara arisan malam di rumah. Pelayanannya sangat profesional, makanan tetap hangat dan semua tamu memuji rasanya."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">S</div>
+            <div class="reviewer-info">
+              <h5>Siti Rahmawati</h5>
+              <span>Pemesanan Catering</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"Ayam bakar madu dan wedang jahenya juara! Harganya sangat terjangkau untuk porsi prasmanan melimpah."</p>
+          <div class="reviewer">
+            <div class="reviewer-avatar">A</div>
+            <div class="reviewer-info">
+              <h5>Andi Pratama</h5>
+              <span>Pekerja Shift Malam</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       KONTAK & INFORMASI LOKASI
+       ========================================== -->
+  <section id="kontak" class="section-padding">
+    <div class="container">
+      <div class="section-title">
+        <span>Hubungi Kami</span>
+        <h2>Lokasi & Reservasi</h2>
+      </div>
+
+      <div class="contact-wrapper">
+        <!-- Contact Info -->
+        <div class="contact-info-card">
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="info-text">
+              <h4>Alamat Warung</h4>
+              <p>Jl. Kuliner Malam No. 88, KOTA BONDOWOSO, Jawa Timur</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div class="info-text">
+              <h4>Jam Operasional</h4>
+              <p>Buka Setiap Hari: 17.00 - 01.00 WIB</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div class="info-text">
+              <h4>WhatsApp / Customer Care</h4>
+              <p>+62 812-3456-7890 (Fast Response)</p>
+            </div>
+          </div>
+
+          <!-- Mock Map -->
+          <div class="map-box">
+            <div class="map-mock">
+              <i class="fa-solid fa-map-location-dot" style="font-size: 2.5rem; color: var(--accent-amber); margin-bottom: 8px;"></i>
+              <p>Peta Interaktif Warung Prasmanan Malam</p>
+              <small style="color: var(--accent-gold);">Bondowoso, Jawa Timur</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact / Feedback Form -->
+        <div class="contact-form-card">
+          <h3 style="color: var(--text-main); margin-bottom: 20px;"><i class="fa-solid fa-envelope"></i> Kirim Pesan & Feedback</h3>
+          <form id="feedback-form" onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+              <label for="nama">Nama Lengkap</label>
+              <input type="text" id="nama" class="form-control" placeholder="Masukkan nama Anda" required>
+            </div>
+
+            <div class="form-group">
+              <label for="whatsapp">Nomor WhatsApp</label>
+              <input type="tel" id="whatsapp" class="form-control" placeholder="08xxxxxxxxxx" required>
+            </div>
+
+            <div class="form-group">
+              <label for="kategori">Kategori Pesan</label>
+              <select id="kategori" class="form-control">
+                <option value="Tanya Menu/Catering">Pertanyaan Catering / Prasmanan</option>
+                <option value="Reservasi Tempat">Reservasi Tempat Nonton/Kumpul</option>
+                <option value="Kritik & Saran">Kritik & Saran</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="pesan">Pesan Anda</label>
+              <textarea id="pesan" class="form-control" rows="4" placeholder="Tuliskan detail pesan Anda..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+              <i class="fa-solid fa-paper-plane"></i> Kirim Pesan Sekarang
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       MODAL PEMESANAN DIRECT WHATSAPP
+       ========================================== -->
+  <div class="modal-overlay" id="order-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeOrderModal()">&times;</button>
+      <h3 style="color: var(--accent-gold); margin-bottom: 10px;"><i class="fa-brands fa-whatsapp"></i> Form Pemesanan WA</h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">Silakan lengkapi data berikut untuk diteruskan ke WhatsApp Admin Warung.</p>
+
+      <div class="form-group">
+        <label for="modal-nama">Nama Pemesan</label>
+        <input type="text" id="modal-nama" class="form-control" placeholder="Contoh: Budi">
+      </div>
+
+      <div class="form-group">
+        <label for="modal-tipe">Tipe Layanan</label>
+        <select id="modal-tipe" class="form-control">
+          <option value="Dine-in / Reservasi Meja">Dine-in / Reservasi Meja</option>
+          <option value="Takeaway / Bungkus">Takeaway / Bungkus</option>
+          <option value="Catering Prasmanan Acara">Catering Prasmanan Acara</option>
+          <option value="Nasi Kotak Custom">Nasi Kotak Custom</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="modal-catatan">Catatan Pesanan / Rincian Tambahan</label>
+        <textarea id="modal-catatan" class="form-control" rows="3" placeholder="Contoh: Porsi 5 orang untuk jam 19.30 WIB"></textarea>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 10px;" onclick="sendWhatsAppModal()">
+        <i class="fa-solid fa-share"></i> Kirim via WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- Container Toast -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-col">
+          <div class="logo" style="margin-bottom: 15px;">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Prasmanan Malam</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Warung Prasmanan Pilihan Utama Kuliner Malam. Menyajikan hidangan hangat otentik dengan harga bersahabat dan suasana santai.</p>
+          <div class="social-links">
+            <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigasi Cepat</h4>
+          <ul class="footer-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#layanan">Layanan Prasmanan</a></li>
+            <li><a href="#simulator">Kalkulator Estimasi</a></li>
+            <li><a href="#menu">Menu Spesial</a></li>
+            <li><a href="#kontak">Kontak Kami</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Layanan</h4>
+          <ul class="footer-links">
+            <li><a href="#">Dine-in Malam</a></li>
+            <li><a href="#">Catering Syukuran</a></li>
+            <li><a href="#">Nasi Box Event</a></li>
+            <li><a href="#">Pemesanan WA Direct</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Jam Operasional</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;"><i class="fa-regular fa-clock" style="color: var(--accent-amber);"></i> Senin - Minggu:</p>
+          <p style="color: var(--text-main); font-weight: 600; font-size: 1rem;">17.00 - 01.00 WIB</p>
+          <small style="color: var(--accent-gold); display: block; margin-top: 8px;">Dapur Selalu Warm & Ready!</small>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Warung Prasmanan Malam. Seluruh Hak Cipta Dilindungi. Dibuat dengan Kehangatan Rasa Rumahan.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       VANILLA JAVASCRIPT LOGIC
+       ========================================== -->
+  <script>
+    // Nomor WA Target Warung
+    const WA_NUMBER = "6281234567890";
+
+    // 1. Sticky Navigation & Scroll Active
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+
+      // Highlight active nav link on scroll
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      let currentSection = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.scrollY >= sectionTop) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // 2. Hamburger Mobile Toggle
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const icon = hamburgerBtn.querySelector('i');
+      if(navMenu.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+      } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // Close mobile nav when link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        const icon = hamburgerBtn.querySelector('i');
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      });
+    });
+
+    // 3. Prasmanan Simulator / Calculator Logic
+    function calculateTotal() {
+      const checkboxes = document.querySelectorAll('.item-checkbox:checked');
+      const selectedListContainer = document.getElementById('selected-items');
+      const totalPriceDisplay = document.getElementById('total-price-display');
+
+      let total = 0;
+      selectedListContainer.innerHTML = '';
+
+      if (checkboxes.length === 0) {
+        selectedListContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">Belum ada item yang dipilih.</p>';
+      } else {
+        checkboxes.forEach(cb => {
+          const name = cb.getAttribute('data-name');
+          const price = parseInt(cb.getAttribute('data-price'));
+          total += price;
+
+          const row = document.createElement('div');
+          row.className = 'selected-item-row';
+          row.innerHTML = `
+            <span>${name}</span>
+            <span style="color: var(--accent-gold);">Rp ${price.toLocaleString('id-ID')}</span>
+          `;
+          selectedListContainer.appendChild(row);
+        });
+      }
+
+      totalPriceDisplay.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+    }
+
+    // Quick select from menu card
+    function quickSelect(itemId) {
+      const checkbox = document.getElementById(itemId);
+      if (checkbox) {
+        checkbox.checked = true;
+        calculateTotal();
+        showToast('Item berhasil ditambahkan ke Simulator Prasmanan!');
+        
+        // Scroll smooth to simulator
+        document.getElementById('simulator').scrollIntoView({ behavior: 'smooth' });
+      } else {
+        showToast('Item siap dipesan!');
+      }
+    }
+
+    // Order from Simulator to WhatsApp
+    function orderFromSimulator() {
+      const checkboxes = document.querySelectorAll('.item-checkbox:checked');
+      if (checkboxes.length === 0) {
+        showToast('Pilih minimal 1 lauk/minuman di simulator!');
+        return;
+      }
+
+      let orderText = "*Halo Prasmanan Malam! Saya ingin memesan piring simulasi berikut:*\n\n";
+      let total = 0;
+
+      checkboxes.forEach((cb, index) => {
+        const name = cb.getAttribute('data-name');
+        const price = parseInt(cb.getAttribute('data-price'));
+        total += price;
+        orderText += `${index + 1}. ${name} - Rp ${price.toLocaleString('id-ID')}\n`;
+      });
+
+      orderText += `\n*Total Estimasi: Rp ${total.toLocaleString('id-ID')}*`;
+      orderText += `\n\nMohon konfirmasi ketersediaan meja / pengiriman. Terima kasih!`;
+
+      const encodedURL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(orderText)}`;
+      window.open(encodedURL, '_blank');
+    }
+
+    // 4. Menu Category Filter
+    function filterMenu(category, btnElement) {
+      // Toggle tab button active state
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      const menuCards = document.querySelectorAll('.menu-card');
+
+      menuCards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 5. Modal Logic
+    function openOrderModal() {
+      document.getElementById('order-modal').classList.add('active');
+    }
+
+    function closeOrderModal() {
+      document.getElementById('order-modal').classList.remove('active');
+    }
+
+    function sendWhatsAppModal() {
+      const nama = document.getElementById('modal-nama').value.trim();
+      const tipe = document.getElementById('modal-tipe').value;
+      const catatan = document.getElementById('modal-catatan').value.trim();
+
+      if (!nama) {
+        showToast('Silakan isi Nama Pemesan!');
+        return;
+      }
+
+      let text = `*HALO WARUNG PRASMANAN MALAM*\n`;
+      text += `Saya ingin melakukan pemesanan / reservasi:\n\n`;
+      text += `• *Nama Pemesan:* ${nama}\n`;
+      text += `• *Tipe Layanan:* ${tipe}\n`;
+      if (catatan) {
+        text += `• *Catatan/Rincian:* ${catatan}\n`;
+      }
+      text += `\nMohon segera direspon. Terima kasih!`;
+
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+      closeOrderModal();
+    }
+
+    // 6. Contact Form Submission Feedback
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const nama = document.getElementById('nama').value;
+      showToast(`Terima kasih ${nama}! Pesan Anda telah terkirim.`);
+      document.getElementById('feedback-form').reset();
+    }
+
+    // 7. Toast Notification Utility
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--accent-gold);"></i> <span>${message}</span>`;
+      
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add('show');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          toast.remove();
+        }, 400);
+      }, 3500);
+    }
+
+    // Initial calculation on page load
+    window.onload = () => {
+      calculateTotal();
+    };
+  </script>
+</body>
+</html>
